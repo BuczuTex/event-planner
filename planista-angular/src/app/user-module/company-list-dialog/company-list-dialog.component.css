@@ -1,0 +1,29 @@
+h2 {
+    text-align: center;
+}
+#dialogContainer {
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    height: 40vh;
+}
+.element-row:hover {
+    background: ghostwhite;
+}
+.company-details {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    word-wrap: break-word;
+    width: 100%;
+}
+.company-details-information {
+    height: 60%;
+}
+.opinion-list {
+    height: 40%;
+    overflow: auto;
+}
+.company-detail-row {
+    height: 0;
+}

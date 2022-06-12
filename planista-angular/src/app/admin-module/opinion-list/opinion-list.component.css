@@ -1,0 +1,62 @@
+#opinionListContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.opinion-detail-row {
+    height: 0;
+}
+.opinion-details {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    width: 50vw;
+}
+h1, table {
+    margin-top: 1%;
+}
+#headerRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+#headerRow > th {
+    width: 33%;
+}
+.opinion-row {
+    width: 50vw;
+    display: flex;
+    flex-direction: row;
+}
+.opinion-row > th {
+    width: 33%;
+}
+td {
+    width: 33%;
+    height: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+h1, h2, h3 {
+    text-align: center;
+}
+.opinion-details-information {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+table {
+    width: 50%;
+}
+button {
+    width: 40%;
+    margin-bottom: 2%;
+}
+.mat-paginator {
+    width: 52%;
+}

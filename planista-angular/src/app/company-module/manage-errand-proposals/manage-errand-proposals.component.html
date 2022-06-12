@@ -1,0 +1,76 @@
+<div id="content">
+    <h1>Propozycje zadań</h1>
+    <div id="manageProposals" *ngIf="dataSource">
+        <table mat-table [dataSource]="dataSource" *ngIf="dataSource.data.length > 0" multiTemplateDataRows>
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>Id</th>
+                <td mat-cell *matCellDef="let element; let i = dataIndex;"> {{ (i + 1) }}</td>
+            </ng-container>
+        
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Nazwa zadania</th>
+                <td mat-cell class="name-cell" *matCellDef="let element"> {{element.title}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef>Edytuj propozycję</th>
+                <td mat-cell *matCellDef="let element; let i = dataIndex">
+                    <button class="icon" mat-icon-button color="basic" (click)="$event.stopPropagation(); triggerEditProposal(i)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef>Usuń propozycję</th>
+                <td mat-cell *matCellDef="let element; let i = dataIndex">
+                    <button class="icon" mat-icon-button color="basic" (click)="$event.stopPropagation(); deleteProposal(i)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="expandedDetail">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element; let i = dataIndex;" [attr.colspan]="displayedColumns.length">
+                    <div class="errand-details" [@detailExpand]="element == expandedElement ? 'expanded':'collapsed'">
+                        <div class="errand-details-information">
+                            <h3>Tytuł zadania</h3>
+                            <p>{{ element.title }}</p>
+                            <h3>Opis zadania</h3>
+                            <p>{{ element.description }}</p>
+                        </div>
+                    </div>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+            class="errand-row"
+            [class.errand-expanded-row]="expandedElement === element"
+            (click)="expandedElement = expandedElement === element ? null : element"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="errand-detail-row"></tr>
+        </table>
+
+        <h2 *ngIf="dataSource.data.length === 0">
+            Dodaj pierwszą propozycję zadania.<br>Jeśli firma nie zdefiniowała propozycji zadań, to <b>nie będzie ona wyświetlana dla użytkowników.</b>
+        </h2>
+        <form [formGroup]="form">
+            <app-errand-form [form]="form"></app-errand-form>
+            <mat-form-field class="category-field" appearance="outline">
+                <mat-label class="form-label" for="category">
+                    Kategoria zadania
+                </mat-label>
+                <mat-select formControlName="category">
+                    <mat-option *ngFor="let category of categories | async" [value]="category['name']">
+                        {{ category['name'] }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('category').hasError('required')">
+                    Kategoria jest wymagana
+                </mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" *ngIf="!isEditing" (click)="addProposal()">Dodaj propozycję zadania</button>
+            <button mat-raised-button color="primary" *ngIf="isEditing" (click)="editProposal()">Zatwierdź zmiany</button>
+        </form>
+    </div>
+</div>

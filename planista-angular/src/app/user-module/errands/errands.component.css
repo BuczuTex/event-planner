@@ -1,0 +1,19 @@
+#errandsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#actionContainer {
+    display: flex;
+    flex-direction: column;
+}
+button:first-of-type {
+    margin-bottom: 5px;
+}
+form {
+    width: 30%;
+}
+#errandList {
+    width: 30%;
+    margin-bottom: 1rem;
+}

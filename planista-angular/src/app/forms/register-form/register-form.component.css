@@ -1,0 +1,15 @@
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+h1 {
+    text-align: center;
+}
+div {
+    width: 100%;
+}
+div > .mat-form-field {
+    width: 50%;
+}

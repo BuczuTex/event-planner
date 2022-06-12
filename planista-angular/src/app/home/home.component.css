@@ -1,0 +1,29 @@
+#banner {
+    height: 50%;
+}
+.home-wrapper {
+    display: flex;
+    flex-direction: column;
+    background-image: url();
+    height: 94vh;
+}
+.home-about {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+.card {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    border: 2px solid lightblue;
+}
+.card-img {
+    max-width: 25%;
+    max-height: 25%;
+}
+.card-body {
+    padding: 6px;
+    padding-bottom: 0;
+}

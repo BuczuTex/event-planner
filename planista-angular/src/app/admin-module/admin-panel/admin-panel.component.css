@@ -1,0 +1,27 @@
+#adminNav {
+    width: 100vw;
+    height: 7vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: darkgray;
+    align-items: center;
+}
+#content {
+    width: 100vw;
+    height: 93vh;
+}
+.nav-link {
+    text-align: center;
+    font-size: large;
+    flex: 1;
+    text-decoration: none;
+    color: black;
+}
+.nav-link:hover {
+    color: white;
+}
+button {
+    background-color: transparent;
+    border: 0;
+}

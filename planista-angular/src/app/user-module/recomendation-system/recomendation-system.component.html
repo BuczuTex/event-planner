@@ -1,0 +1,12 @@
+<mat-card id="filteredItems" *ngIf="recommendedItems">
+    <mat-card-title>Polecane zadania do wykonania</mat-card-title>
+    <mat-card-content id="content">
+        <p>Wyszukaj zadania</p>
+        <input #input type="text" (keyup)="filter(input.value)">
+        <mat-selection-list multiple="false" (selectionChange)="sendItemInfoToParent($event.option)">
+            <mat-list-option *ngFor="let item of filteredItems" value="{{ item.title }}">
+                {{ item.title }}
+            </mat-list-option>
+        </mat-selection-list>
+    </mat-card-content>
+</mat-card>

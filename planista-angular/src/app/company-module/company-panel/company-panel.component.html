@@ -1,0 +1,18 @@
+<mat-sidenav-container id="sideNavContainer" autosize>
+    <mat-sidenav id="sideNav" #sideNav mode="side" opened>
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="panel-title">Zadania</mat-panel-title>
+                </mat-expansion-panel-header>
+                <p class="center"><a class="side-nav-link" routerLink="overview">Oczekujące zadania</a></p>
+                <p class="center"><a class="side-nav-link" routerLink="errands/manage">Zarządzaj propzycjami zadań</a></p>
+            </mat-expansion-panel>
+        </mat-accordion>
+        <p><button mat-button color="basic" (click)="logout()">Wyloguj się</button></p>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <button type="button" mat-button (click)="sideNav.toggle()">Sidenav</button>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,5 @@
+<!--- TODO: Wyszczególnić validatory, to znaczy, porozrzucać w zależności od błędu. --->
+<form [formGroup]="userForm">
+    <app-register-form [form]="userForm"></app-register-form>
+    <button class="btn" mat-raised-button color="primary" (click)="register(userForm)">Zarejestruj się</button>
+</form>

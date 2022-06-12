@@ -1,0 +1,10 @@
+<div id="eventNotes">
+    <h2>Notatki</h2>
+    <div id="eventNotesCon">
+        <app-note-list [notes]="notes"></app-note-list>
+    </div>
+    <form [formGroup]="noteForm">
+        <app-note-form [form]="noteForm"></app-note-form>
+        <button mat-raised-button color="primary" (click)="addNote(noteForm)">Dodaj notatkę</button>
+    </form>
+</div>

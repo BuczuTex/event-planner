@@ -1,0 +1,15 @@
+<div id="rateCompanyContainer">
+    <h2>Oceń firmy</h2>
+    <mat-accordion id="accordion">
+        <mat-expansion-panel *ngFor="let company of companyListToRate; let i = index;">
+            <mat-expansion-panel-header>
+                <mat-panel-title> {{ company.name }}</mat-panel-title>
+                <mat-panel-description>Wystaw opinię</mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="opinion-form">
+                <app-opinion-form [form]="opinionForm"></app-opinion-form>
+                <button mat-raised-button color="primary" (click)="addOpinion(i)">Dodaj opinię</button>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

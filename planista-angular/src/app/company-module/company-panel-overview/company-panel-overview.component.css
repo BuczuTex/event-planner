@@ -1,0 +1,7 @@
+.errand-list {
+    max-height: 33%;
+    overflow: auto;
+}
+h2 {
+    text-align: center;
+}

@@ -1,0 +1,67 @@
+<h2>Wybierz firmę do obsługi zadania</h2>
+<mat-dialog-content id="dialogContainer">
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>Id</th>
+            <td mat-cell *matCellDef="let element; let i = dataIndex;"> {{ (i + 1) }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nazwa firmy</th>
+            <td mat-cell *matCellDef="let element;"> {{ element.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="nip">
+            <th mat-header-cell *matHeaderCellDef>NIP</th>
+            <td mat-cell *matCellDef="let element;"> {{ element.nip }}</td>
+        </ng-container>
+        <!-- details after expanded row -->
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+                <div class="company-details" [@detailExpand]="element == expandedElement ? 'expanded':'collapsed'">
+                    <div class="company-details-information">
+                        <h2>Informacje o firmie</h2>
+                        <p>{{ element.name }}</p>
+                        <p>{{ element.description }}</p>
+                        <p>Nazwa firmy: {{ element.name }}</p>
+                        <p>NIP: {{ element.nip }}</p>
+                        <p>Adres: {{ element.address['street'] + ' ' + element.address['buildingNumber'] + 
+                            (element.address['flatNumber'] ? '/' + element.address['flatNumber'] : '')}}</p>
+                        <p>Kod pocztowy: {{ element.address['zipCode'] }}</p>
+                    </div>
+                    <div class="opinion-list" *ngIf="opinionsShowed">
+                        <div class="opinion" *ngFor="let opinion of element.opinions">
+                            <mat-card>
+                                <mat-card-title>Opinia użytkownika {{ opinion.user.userName }}</mat-card-title>
+                                <mat-card-subtitle>Dodano {{ opinion.addDate | date: 'short' }}</mat-card-subtitle>
+                                <mat-card-content>{{ opinion.contents }}</mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+                    <div class="proposal-list" *ngIf="proposalsShowed">
+                        <h2>Propozycje zadań dodanych przez firmę</h2>
+                        <mat-selection-list [multiple]="false" (selectionChange)="selectionChange($event.option)">
+                            <mat-list-option value="{{ proposal.title }}" *ngFor="let proposal of errandProposals">{{ proposal.title }}</mat-list-option>
+                        </mat-selection-list>
+                    </div>
+                    <button mat-raised-button color="secondary" *ngIf="!opinionsShowed" (click)="showOpinions()">Pokaż opinie</button>
+                    <button mat-raised-button color="secondary" *ngIf="opinionsShowed" (click)="showOpinions()">Schowaj opinie</button>
+                    <button mat-raised-button color="secondary" *ngIf="!proposalsShowed" (click)="showProposals()">Pokaż propozycje zadań</button>
+                    <button mat-raised-button color="secondary" *ngIf="proposalsShowed" (click)="showProposals()">Schowaj propozycje zadań</button>
+                    <button mat-raised-button color="primary" (click)="selectCompany(element)">Wybierz firmę</button>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplay"
+        class="element-row"
+        [class.element-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="company-detail-row"></tr>
+    </table>
+    <mat-paginator *ngIf="companyList" [length]="companyList.length" [pageSize]="5"></mat-paginator>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button [matDialogClose]="true" color="primary">Zamknij okno</button>
+</mat-dialog-actions>

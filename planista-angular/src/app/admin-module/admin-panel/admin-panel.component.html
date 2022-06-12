@@ -1,0 +1,10 @@
+<div id="adminNav">
+    <a class="nav-link" routerLink="confirm-list">Zatwierdź aktywność użytkowników</a>
+    <a class="nav-link" routerLink="users">Przeglądaj użytkowników</a>
+    <a class="nav-link" routerLink="events">Przeglądaj wydarzenia</a>
+    <a class="nav-link" routerLink="opinions">Przeglądaj opinie użytkowników</a>
+    <button class="nav-link" (click)="logout()">Wyloguj się</button>
+</div>
+<div id="content">
+    <router-outlet></router-outlet>
+</div>

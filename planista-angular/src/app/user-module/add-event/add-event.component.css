@@ -1,0 +1,21 @@
+h3, p {
+    text-align: center;
+}
+.add-event-container {
+    display: flex;
+    max-width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    word-break: break-all;
+}
+.next-button {
+    margin-bottom: 5px;
+    width: 100%;
+}
+.prev-button, #submitButton {
+    width: 100%;
+}
+::ng-deep .mat-horizontal-stepper-content {
+    width: 31vw;
+}

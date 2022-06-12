@@ -1,0 +1,29 @@
+<mat-accordion *ngIf="errandList && errandList.length > 0">
+    <mat-expansion-panel *ngFor="let errand of errandList; index as i;">
+        <mat-expansion-panel-header *ngIf="errand.state !== 4" (click)="initForm(i);">
+            <mat-panel-title>{{ errand.title }}</mat-panel-title>
+            <mat-panel-description *ngIf="errand.state !== 3">Szczegóły zadania</mat-panel-description>
+            <mat-panel-description *ngIf="errand.state === 3">Zadanie zakończone</mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngIf="errand.state === 0">
+            <app-errand-form [form]="errandForm"></app-errand-form>
+            <b><p *ngIf="errand.state === 0">Oczekuje na potwierdzenie firmy</p></b>
+            <b><p *ngIf="errand.state === 1">Oczekuje na potwierdzenie administratora</p></b>
+            <div class="action-container">
+                <button mat-raised-button color="primary" (click)="saveChanges(i)">Zatwierdź zmiany</button>
+                <button mat-raised-button color="warn" (click)="deleteErrand(i)">Usuń zadanie</button>
+            </div>
+        </div>
+        <div *ngIf="errand.state === 2">
+            <h2>{{ errand.title }}</h2>
+            <p>{{ errand.description }}</p>
+            <p><b>Status: </b>Zadanie jest w realizacji.</p>
+        </div>
+        <div *ngIf="errand.state === 3">
+            <h2> {{ errand.title }}</h2>
+            <p>{{ errand.description }}</p>
+            <p><b>Status: </b>Zadanie zostało zrealizowane.</p>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>
+<p *ngIf="errandList && errandList.length === 0">Brak zadań dla firm</p>

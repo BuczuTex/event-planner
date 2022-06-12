@@ -1,0 +1,45 @@
+<form [formGroup]="form">
+    <mat-form-field appearance="outline">
+        <mat-label for="name">Nazwa firmy</mat-label>
+        <input matInput id="name" type="text" formControlName="name">
+        <mat-error *ngIf="(form.get('name').touched || form.get('name').dirty) && 
+                            form.get('name').hasError('required')">
+            Nazwa firmy jest wymagana.
+        </mat-error>
+        <mat-error *ngIf="form.get('name').hasError('maxlength')">
+            Nazwa firmy nie może być dłuższa niż {{ form.get('name').errors.maxlength.requiredLength }} znaków.
+        </mat-error>
+        <mat-error *ngIf="form.get('name').hasError('minlength')">
+            Nazwa firmy nie może być krótsza niż {{ form.get('name').errors.minlength.requiredLength }} znaków.
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label for="nip">NIP</mat-label>
+        <input matInput id="nip" type="number" formControlName="nip">
+        <mat-error *ngIf="(form.get('nip').touched || form.get('nip').dirty) && 
+                          form.get('nip').hasError('required')">
+            NIP jest wymagany.
+        </mat-error>
+        <mat-error *ngIf="form.get('nip').hasError('maxlength')">
+            NIP nie może być dłuższy niż {{ form.get('nip').errors.maxlength.requiredLength }} znaków.
+        </mat-error>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline">
+        <mat-label for="description">Opis firmy</mat-label>
+        <textarea matInput class="form-control" id="description" formControlName="description"
+        rows="1" cols="1" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" 
+        cdkAutosizeMaxRows="6"></textarea>
+        <mat-error *ngIf="(form.get('description').touched || form.get('description').dirty) && 
+                          form.get('description').hasError('required')">
+            Opis jest wymagany.
+        </mat-error>
+        <mat-error  *ngIf="form.get('description').hasError('maxlength')">
+            Opis nie może być dłuższy niż {{ form.get('description').errors.maxlength.requiredLength }} znaków.
+        </mat-error>
+        <mat-error  *ngIf="form.get('description').hasError('minlength')">
+            Opis nie może być krótszy niż {{ form.get('description').errors.minlength.requiredLength }} znaków.
+        </mat-error>
+    </mat-form-field>
+</form>

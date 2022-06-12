@@ -1,0 +1,13 @@
+<form [formGroup]="form">
+    <mat-form-field appearance="outline">
+        <mat-label class="form-label" for="contents">Treść opinii</mat-label>
+        <textarea rows="1" cols="1" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5" class="form-control" id="contents" type="text" formControlName="contents"></textarea>
+        <mat-error  *ngIf="form.get('contents').hasError('required') && (form.get('contents').dirty || form.get('contents').touched)">
+            Treść opinii jest wymagana
+        </mat-error>
+        <mat-error  *ngIf="form.get('contents').hasError('maxlength')">
+            Treść opinii nie może być dłuższa niż {{ form.get('contents').errors.maxlength.requiredLength }}
+        </mat-error>
+    </mat-form-field>
+</form>

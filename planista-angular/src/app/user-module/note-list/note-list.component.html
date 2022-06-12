@@ -1,0 +1,12 @@
+<div id="noteListContainer">
+    <div id="notesContainer">
+        <mat-card class="note" *ngFor="let note of notes; index as i;">
+            <mat-card-subtitle> Notatka {{ (i + 1) }} </mat-card-subtitle>
+            <mat-card-title>{{ note.title }}</mat-card-title>
+            <mat-card-content>{{ note.contents }}</mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="warn" (click)="deleteNote(i)">Usuń notatkę</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

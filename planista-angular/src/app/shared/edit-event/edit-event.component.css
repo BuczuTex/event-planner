@@ -1,0 +1,16 @@
+#editEventContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#submitEventButton {
+    margin-top: 1.5rem;
+}
+#formsContainer {
+    display: flex;
+    flex-direction: column;
+}
+h1, h2 {
+    text-align: center;
+}

@@ -1,0 +1,17 @@
+<div *ngIf="eventInfo" id="editEventContainer">
+    <div id="formsContainer">
+        <div id="eventFormContainer">
+            <h2>Informacje o wydarzeniu</h2>
+            <form [formGroup]="eventForm">
+                <app-event-form [form]="eventForm"></app-event-form>
+            </form>
+        </div>
+        <div id="addressFormContainer">
+            <h2>Informacje o adresie</h2>
+            <form [formGroup]="addressForm">
+                <app-address-form [form]="addressForm"></app-address-form>
+            </form>
+        </div>
+        <button id="submitEventButton" mat-raised-button color="primary" (click)="editEvent()">Zatwierdź zmiany</button>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+.mat-form-field, button {
+    width: 100%;
+}
+#addressNumbers > .mat-form-field {
+    width: 50%;
+}

@@ -1,0 +1,38 @@
+.center {
+    text-align: center;
+    margin-right: 12px;
+}
+.side-nav-link {
+    color: white;
+    text-decoration: none;
+}
+#sideNavContainer{
+    width: 100vw;
+    height: 100vh;
+}
+#sideNav {
+    display: flex;
+    flex-direction: column;
+    width: 15vw;
+    height: 100vh;
+    background-color: black;
+    color: white;
+}
+.mat-expansion-panel {
+    justify-content: center;
+    background-color: black;
+}
+.panel-title {
+    justify-content: center;
+    color: white;
+}
+.mat-expansion.panel > a {
+    color: white;
+}
+::ng-deep .mat-expansion-indicator {
+    display: none;
+}
+p {
+    margin-right: 6%;
+    text-align: center;
+}

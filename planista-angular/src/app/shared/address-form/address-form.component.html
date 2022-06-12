@@ -1,0 +1,53 @@
+<!-- TODO: Wamat-errordatory -->
+<div [formGroup]="form">
+    <mat-form-field appearance="outline">
+        <mat-label class="form-label" for="street">Umat-errorca</mat-label>
+        <input matInput class="form-control" id="street" type="text" formControlName="street">
+        <mat-error  *ngIf="(form.get('street').touched || form.get('street').dirty) && 
+                                          form.get('street').hasError('required')">
+            Ulica jest wymagana.
+        </mat-error>
+        <mat-error  *ngIf="form.get('street').hasError('maxlength')">
+            Ulica nie może być dłuższa niż {{ form.get('street').errors.maxlength.requiredLength }} znaków.
+        </mat-error>
+    </mat-form-field>
+    <div id="addressNumbers">
+        <mat-form-field appearance="outline">
+            <mat-label class="form-label" for="buildingNumber">Numer budynku</mat-label>
+            <input matInput class="form-control" id="buildingNumber" type="number" formControlName="buildingNumber">
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+            <mat-label class="form-label" for="flatNumber">Numer lokalu</mat-label>
+            <input matInput class="form-control" id="flatNumber" type="number" formControlName="flatNumber">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label class="form-label" for="city">Miasto</mat-label>
+            <input matInput class="form-control" id="city" type="text" formControlName="city">
+            <mat-error  *ngIf="(form.get('city').touched || form.get('city').dirty) && 
+                                              form.get('city').hasError('required')">
+                Nazwa miasta jest wymagana.
+            </mat-error>
+            <mat-error  *ngIf="form.get('city').hasError('maxlength')">
+                Nazwa miasta nie może być dłuższa niż {{ form.get('city').errors.maxlength.requiredLength }} znaków.
+            </mat-error>
+            <mat-error  *ngIf="form.get('city').hasError('minlength')">
+                Nazwa miasta nie może być krótsza niż {{ form.get('city').errors.minlength.requiredLength }} znaków.
+            </mat-error>
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+            <mat-label class="form-label" for="zipCode">Kod pocztowy</mat-label>
+            <input matInput class="form-control" id="zipCode" type="text" formControlName="zipCode">
+            <mat-error  *ngIf="(form.get('zipCode').touched || form.get('zipCode').dirty) && 
+                                             form.get('zipCode').hasError('required')">
+                Kod pocztowy jest wymagany
+            </mat-error>
+            <mat-error  *ngIf="form.get('zipCode').hasError('pattern')">
+                Kod pocztowy musi być w formacie yy-yyy
+            </mat-error>
+        </mat-form-field>
+    </div>
+</div>

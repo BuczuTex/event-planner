@@ -1,0 +1,52 @@
+<!-- TODO: Wamat-errordatory -->
+<div [formGroup]="form">
+    <mat-form-field class="maxWidthFields" appearance="outline">
+        <mat-label class="form-label" for="name">Nazwa wydarzenia</mat-label>
+        <input matInput class="form-control" id="name" type="text" formControlName="name">
+        <mat-error  *ngIf="form.get('name').hasError('required') && (form.get('name').touched || form.get('name').dirty)">
+            Nazwa wydarzenia jest wymagana
+        </mat-error>
+        <mat-error  *ngIf="form.get('name').hasError('maxlength')">
+            Nazwa wydarzenia nie może być dluższa niż {{ form.get('name').errors.maxlength.requiredLength }}
+        </mat-error>
+    </mat-form-field>
+    <ul>
+    </ul>
+    <mat-form-field class="maxWidthFields" appearance="outline">
+        <mat-label class="form-label" for="description">Opis wydarzenia</mat-label>
+        <textarea matInput class="form-control" id="description" formControlName="description"
+        rows="1" cols="1" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" 
+        cdkAutosizeMaxRows="6"></textarea>
+        <mat-error  *ngIf="form.get('description').hasError('required') && (form.get('description').touched || form.get('description').dirty)">
+            Opis jest wymagany
+        </mat-error>
+        <mat-error  *ngIf="form.get('description').hasError('maxlength')">
+            Opis nie może być dluższy niż {{ form.get('description').errors.maxlength.requiredLength }}
+        </mat-error>
+    </mat-form-field>
+    <ul>
+    </ul>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label class="form-label" for="date">Data wydarzenia</mat-label>
+            <input [min]="minDate" matInput class="form-control" id="date" formControlName="date" 
+            [ngxMatDatetimePicker]="datePicker">
+            <mat-datepicker-toggle matSuffix [for]="$any(datePicker)"></mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #datePicker></ngx-mat-datetime-picker>
+            <mat-error  *ngIf="form.get('date').hasError('required') && (form.get('date').touched || form.get('date').dirty)">
+                Data jest wymagana
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label class="form-label" for="category">Kategoria wydarzenia</mat-label>
+            <mat-select formControlName="category">
+                <mat-option *ngFor="let category of categories | async;" [value]="category['name']">
+                    {{ category['name'] }}
+                </mat-option>
+            </mat-select>
+            <mat-error  *ngIf="form.get('category').hasError('required') && (form.get('category').touched || form.get('category').dirty)">
+                Kategoria jest wymagana
+            </mat-error>
+        </mat-form-field>
+    </div>
+</div>

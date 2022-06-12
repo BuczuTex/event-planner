@@ -1,0 +1,21 @@
+<div id="container">
+    <mat-stepper id="companyRegisterForm" [linear]="false" #stepper>
+        <mat-step [stepControl]="userForm">
+            <ng-template matStepLabel>Uzupełnij dane użytkownika</ng-template>
+            <div>
+                <app-register-form [form]="userForm"></app-register-form>
+                <button mat-raised-button color="primary" matStepperNext>Przejdź do kolejnego kroku</button>
+            </div>
+        </mat-step>
+        <mat-step [stepControl]="companyForm">
+            <ng-template matStepLabel>Uzupełnij dane firmy</ng-template>
+            <app-company-register-form [form]="companyForm"></app-company-register-form>
+            <button mat-raised-button color="primary" matStepperNext>Przejdź do kolejnego kroku</button>
+        </mat-step>
+        <mat-step [stepControl]="addressForm">
+            <ng-template matStepLabel>Uzupełnij adres firmy</ng-template>
+            <app-address-form [form]="addressForm"></app-address-form>
+            <button mat-raised-button color="primary" matStepperNext (click)="onSubmit()">Utwórz firmę</button>
+        </mat-step>
+    </mat-stepper>
+</div>

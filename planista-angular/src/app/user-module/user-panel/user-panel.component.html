@@ -1,0 +1,20 @@
+<mat-sidenav-container id="sideNavContainer" autosize>
+    <mat-sidenav id="sideNav" #sidenav mode="side" opened>
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="panel-title">Wydarzenia</mat-panel-title>
+                </mat-expansion-panel-header>
+                <p class="center"><a class="side-nav-link" routerLink="events/create">Utwórz wydarzenie</a></p>
+                <p class="center"><a class="side-nav-link" routerLink="events">Lista wydarzeń</a></p>
+            </mat-expansion-panel>
+        </mat-accordion>
+        <p><button mat-button color="basic" (click)="logout()">Wyloguj się</button></p>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div>
+            <button type="button" mat-button (click)="sidenav.toggle()">Sidenav</button>
+        </div>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

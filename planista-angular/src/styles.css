@@ -1,0 +1,7 @@
+body {
+    margin: 0;
+}
+.danger {
+    font-size: smaller;
+    color: red;
+}

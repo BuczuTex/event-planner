@@ -1,0 +1,24 @@
+<form [formGroup]="form">
+    <mat-form-field appearance="outline">
+        <mat-label class="form-label" for="title">Tytuł zadania</mat-label>
+        <input matInput cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" class="form-control"
+        id="title" type="text" formControlName="title">
+        <mat-error  *ngIf="form.get('title').hasError('required') && (form.get('title').dirty || form.get('title').touched)">
+            Tytuł zadania jest wymagany
+        </mat-error>
+        <mat-error  *ngIf="form.get('title').hasError('maxlength')">
+            Tytuł zadania nie może być dłuższy niż {{ form.get('title').errors.maxlength.requiredLength }} znaków
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label class="form-label" for="description">Opis zadania</mat-label>
+        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5" class="form-control" id="description" type="text" formControlName="description"></textarea>
+        <mat-error  *ngIf="form.get('description').hasError('required') && (form.get('description').dirty || form.get('description').touched)">
+            Opis jest wymagany
+        </mat-error>
+        <mat-error  *ngIf="form.get('description').hasError('maxlength')">
+            Opis nie może być dłuższy niż {{ form.get('description').errors.maxlength.requiredLength }} znaków
+        </mat-error>
+    </mat-form-field>
+</form>

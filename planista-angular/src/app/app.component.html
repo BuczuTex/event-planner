@@ -1,0 +1,10 @@
+<nav id="homeNav" *ngIf="!appRouter.url.includes('user') && !appRouter.url.includes('company') && !appRouter.url.includes('admin')">
+    <a id="logo" routerLink="/"><img src="../assets/images/logo.png" height="50"></a>
+    <a class="nav-link" *ngIf="!loggedIn()" routerLink="login">Panel autoryzacji</a>
+    <a class="nav-link" *ngIf="loggedIn() && getRoleFromToken() === 'User'" routerLink="user">Panel użytkownika</a>
+    <a class="nav-link" *ngIf="loggedIn() && getRoleFromToken() === 'CompanyUser'" routerLink="company">Panel firmy</a>
+    <a class="nav-link" *ngIf="loggedIn() && getRoleFromToken() === 'Administrator'" routerLink="admin">Panel administratora</a>
+</nav>
+<main>
+    <router-outlet></router-outlet> 
+</main>

@@ -1,0 +1,74 @@
+<h1>Zarejestruj się</h1>
+<form method="POST" [formGroup]="form">
+    <mat-form-field class="form-field" appearance="outline">
+        <mat-label for="firstName">Imię</mat-label>
+        <input matInput id="firstName" type="text" formControlName="firstName">
+        <mat-error  *ngIf="(form.get('firstName').touched || form.get('firstName').dirty) && 
+                            form.get('firstName').hasError('required')">Imię jest wymagane.</mat-error>
+        <mat-error  *ngIf="form.get('firstName').hasError('maxlength')">
+            Imię nie może być dłuższe niż {{ form.get('firstName').errors.maxlength.requiredLength }} znaków.
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field" appearance="outline">
+        <mat-label for="lastName">Nazwisko</mat-label>
+        <input matInput id="lastName" type="text" formControlName="lastName">
+        <mat-error *ngIf="(form.get('lastName').touched || form.get('lastName').dirty) && 
+                                    form.get('lastName').hasError('required')">Nazwisko jest wymagane.</mat-error>
+        <mat-error *ngIf="form.get('lastName').hasError('maxlength')">
+            Nazwisko nie może być dłuższe niż {{ form.get('lastName').errors.maxlength.requiredLength }} znaków.
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field" appearance="outline">
+        <mat-label for="userName">Nazwa użytkownika</mat-label>
+        <input matInput id="userName" type="text" formControlName="userName">
+        <mat-error *ngIf="form.get('userName').hasError('pattern')">
+            Nazwa użytkownika nie może zawierać znaków specjalnych.
+        </mat-error>
+        <mat-error *ngIf="(form.get('userName').touched || form.get('userName').dirty) && 
+                          form.get('userName').hasError('required')">Nazwa użytkownika jest wymagana.</mat-error>
+        <mat-error *ngIf="form.get('userName').hasError('maxlength')">
+            Nazwa użytkownika nie może być dłuższa niż {{ form.get('userName').errors.maxlength.requiredLength }} znaków.
+        </mat-error>
+        <mat-error *ngIf="form.get('userName').hasError('minlength')">
+            Nazwa użytkownika nie może być krótsza niż {{ form.get('userName').errors.minlength.requiredLength }} znaków.
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field" appearance="outline">
+        <mat-label for="email">E-mail</mat-label>
+        <input matInput id="email" type="email" formControlName="email">
+        <mat-error *ngIf="(form.get('email').touched || form.get('email').dirty) && 
+                          form.get('email').hasError('required')">
+            Adres e-mail jest wymagany.
+        </mat-error>
+        <mat-error *ngIf="form.get('email').hasError('pattern')">
+            Niepoprawny format e-maila.
+        </mat-error>
+        <mat-error *ngIf="form.get('email').hasError('maxlength')">
+            Adres e-mail nie może być dłuższy niż {{ form.get('email').errors.maxlength.requiredLength }} znaków.
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field" appearance="outline">
+        <mat-label for="password">Hasło</mat-label>
+        <input matInput id="password" type="password" formControlName="password">
+        <mat-error *ngIf="(form.get('password').touched || form.get('password').dirty) && 
+                           form.get('password').hasError('required')">
+            Hasło jest wymagane.
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field" appearance="outline">
+        <mat-label for="confirmPassword">Potwierdź hasło</mat-label>
+        <input matInput id="confirmPassword" type="password" formControlName="confirmPassword">
+        <mat-error *ngIf="(form.get('confirmPassword').touched || form.get('confirmPassword').dirty) && 
+                           form.get('confirmPassword').hasError('required')">
+            Potwierdzenie hasła jest wymagane.
+        </mat-error>
+        <mat-error *ngIf="form.get('confirmPassword').hasError('incorrectPasswords')">
+            Hasła nie są zgodne.
+        </mat-error>
+    </mat-form-field>
+</form>

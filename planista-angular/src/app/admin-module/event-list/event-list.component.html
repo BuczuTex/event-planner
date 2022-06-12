@@ -1,0 +1,94 @@
+<h1>Lista wydarzeń</h1>
+<p><mat-form-field>
+    <input matInput type="text" placeholder="Filtruj" (keyup)="filter($event.target.value)">
+</mat-form-field></p>
+<table mat-table id="eventListContainer" multiTemplateDataRows [dataSource]="dataSource">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let element; let i = dataIndex;"> {{ (i + 1) }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nazwa wydarzenia</th>
+        <td mat-cell *matCellDef="let element;"> {{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="user">
+        <th mat-header-cell *matHeaderCellDef>Użytkownik</th>
+        <td mat-cell *matCellDef="let element;">{{ element.user.firstName + ' ' + element.user.lastName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element; let i = dataIndex;" [attr.colspan]="columns.length">
+            <div class="event-details" [@detailExpand]="element == expandedElement ? 'expanded':'collapsed'">
+                <div class="event-details-information">
+                    <h2>Informacje o wydarzeniu {{ element.name }}</h2>
+                    <h3>Nazwa: {{ element.name }}</h3>
+                    <h3>Opis: {{ element.name }}</h3>
+                    <h3>Data: {{ element.date | date: 'short' }}</h3>
+                    <h3>Kategoria: {{ categories[element.categoryId] }}</h3>
+                    <mat-accordion>
+                        <mat-expansion-panel class="panel" *ngIf="element.notes">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>Wyświetl notatki</mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-expansion-panel class="panel" *ngFor="let note of element.notes;">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>{{ note.title }}</mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <div class="note-info">
+                                    <h4>Tytuł: {{ note.title }}</h4>
+                                    <h4>Opis: {{ note.contents }}</h4>
+                                    <button mat-raised-button color="warn" (click)="deleteNote(i, note);">Usuń notatkę</button>
+                                </div>
+                            </mat-expansion-panel>
+                        </mat-expansion-panel>
+                        <mat-expansion-panel class="panel" *ngIf="element.errands">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>Wyświetl zadania dla firm</mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-expansion-panel class="panel" *ngFor="let errand of element.errands">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>{{ errand.title }}</mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <div class="errand-info">
+                                    <h4>Tytuł: {{ errand.title }}</h4>
+                                    <h4>Opis: {{ errand.description }}</h4>
+                                    <h4>Realizowane przez firmę: {{ errand.company.name }}</h4>
+                                    <h4>Status: {{ states[errand.state] }}</h4>
+                                </div>
+                            </mat-expansion-panel>
+                        </mat-expansion-panel>
+                        <mat-expansion-panel class="panel" *ngIf="element.toDoListItems">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>Wyświetl najważniejsze zadania</mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-expansion-panel class="panel" *ngFor="let item of element.toDoListItems">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>{{ item.title }}</mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <div class="item-info">
+                                    <h4>Tytuł: {{ item.title }}</h4>
+                                    <h4>Opis: {{ item.description }}</h4>
+                                    <h4>Status: {{ states[item.state] }}</h4>
+                                </div>
+                            </mat-expansion-panel>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+            </div>
+        </td>
+    </ng-container>
+
+    <tr id="headerRow" mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let element; columns: columns;"
+    class="event-row"
+    [class.event-expanded-row]="expandedElement === element"
+    (click)="expandedElement = expandedElement === element ? null : element"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="event-detail-row"></tr>
+</table>
+<mat-paginator [pageSize]="10"
+[pageSizeOptions]="[5, 10, 15]"
+aria-label="Wybierz stronę">
+</mat-paginator>

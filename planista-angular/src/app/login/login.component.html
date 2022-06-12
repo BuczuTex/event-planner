@@ -1,0 +1,30 @@
+<!-- TODO: Walidacja -->
+<mat-card class="login-container">
+    <form method="POST" [formGroup]="loginForm" (ngSubmit)="login(loginForm)">
+        <mat-card-title>Zaloguj się</mat-card-title>
+        <mat-card-content>
+            <mat-form-field appearance="outline">
+                <mat-label class="form-label" for="username">Nazwa użytkownika</mat-label>
+                <input matInput class="form-control" id="username" type="text" formControlName="username">
+                <mat-error  *ngIf="loginForm.get('username').hasError('required') && (loginForm.get('username').touched || loginForm.get('username').dirty)">
+                    Nazwa użytkownika jest wymagana
+                </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline">
+                <mat-label class="form-label" for="password">Hasło</mat-label>
+                <input matInput class="form-control" id="password" type="password" formControlName="password">
+                <mat-error  *ngIf="loginForm.get('password').hasError('required') && (loginForm.get('password').touched || loginForm.get('password').dirty)">
+                    Hasło jest wymagane
+                </mat-error>
+            </mat-form-field>
+    
+            <button class="btn" mat-raised-button color="primary">Zaloguj się</button>
+    
+            <mat-list>
+               <mat-list-item><a id="first-link" routerLink="/register">Nie masz konta? Zarejestruj się</a></mat-list-item>
+               <mat-list-item><a id="second-link" routerLink="/company-register">Rejestracja dla firm</a></mat-list-item>
+            </mat-list>
+        </mat-card-content>
+    </form>
+</mat-card>

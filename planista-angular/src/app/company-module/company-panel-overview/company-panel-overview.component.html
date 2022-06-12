@@ -1,0 +1,12 @@
+<div class="errand-list">
+    <h2>Zadania oczekujące na potwierdzenie</h2>
+    <app-errand-list [state]="states.WAITING_FOR_COMPANY"></app-errand-list>
+</div>
+<div class="errand-list">
+    <h2>Zadania realizowane</h2>
+    <app-errand-list [state]="states.ACCEPTED"></app-errand-list>
+</div>
+<div class="errand-list">
+    <h2>Zadania zakończone</h2>
+    <app-errand-list [state]="states.FINISHED"></app-errand-list>
+</div>

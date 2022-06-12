@@ -1,0 +1,15 @@
+<div id="errandsContainer">
+    <app-errand-list id="errandList" [errandList]="errandList"></app-errand-list>
+    <!-- <div id="searchErrand">
+        <div class="errand" *ngFor=""
+    </div> -->
+    <form [formGroup]="errandForm">
+        <h2>Dodaj zadanie</h2>
+        <app-errand-form [form]="errandForm"></app-errand-form>
+        <h3 *ngIf="selectedCompany">Wybrana firma: {{ selectedCompany.name }}</h3>
+        <div id="actionContainer">
+            <button mat-raised-button color="secondary" (click)="selectCompany()">Wybierz firmę</button>
+            <button mat-raised-button color="primary" (click)="postErrand();">Wyślij zgłoszenie do firmy</button>
+        </div>
+    </form>
+</div>

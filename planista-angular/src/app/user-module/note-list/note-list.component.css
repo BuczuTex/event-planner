@@ -1,0 +1,27 @@
+#noteListContainer {
+    width: 70vw;
+    height: 100%;
+    overflow: auto;
+}
+#notesContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.note {
+    max-width: 45%;
+    max-height: 40%;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    overflow: auto;
+    word-wrap: break-word;
+    flex: 0 0 50%;
+}
+button {
+    width: 100%;
+}
+h2 {
+    text-align: center;
+}

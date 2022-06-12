@@ -1,0 +1,73 @@
+<div id="eventListContainer">
+    <h2>Lista wydarzeń</h2>
+    <mat-form-field>
+        <input matInput type="text" placeholder="Filtrowanie po nazwie" (keyup)="filterName($event.target.value)">
+    </mat-form-field>
+        <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="id" id="idRow">
+                <th class="idRow" mat-header-cell *matHeaderCellDef>Id</th>
+                <td mat-cell class="idRow" *matCellDef="let element; index as i;"> {{ i + 1 }}</td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Nazwa</th>
+                <td mat-cell *matCellDef="let element"> {{ element.name }}</td>
+            </ng-container>
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef>Data</th>
+                <td mat-cell *matCellDef="let element"> {{ element.date | date: short }}</td>
+            </ng-container>
+            <ng-container matColumnDef="category">
+                <th mat-header-cell *matHeaderCellDef>Kategoria</th>
+                <td mat-cell *matCellDef="let element"> {{ element.category['name'] }}</td>
+            </ng-container>
+            <ng container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef>Edytuj wydarzenie</th>
+                <td mat-cell *matCellDef="let element" class="icon">
+                    <a mat-icon-button color="basic" [routerLink]="element.id">
+                        <mat-icon>edit</mat-icon>
+                    </a>
+                </td>
+            </ng>
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef>Usuń</th>
+                <td mat-cell *matCellDef="let element; index as i;" class="icon">
+                    <button mat-icon-button color="basic" (click)="openDialog(i)">
+                        <mat-icon>clear</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="errands">
+                <th mat-header-cell *matHeaderCellDef>Zadania dla firm</th>
+                <td mat-cell *matCellDef="let element" class="icon">
+                    <a mat-icon-button color="basic" [routerLink]="[element.id, 'errands']">
+                        <mat-icon>format_list_bulleted</mat-icon>
+                    </a>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="toDoList">
+                <th mat-header-cell *matHeaderCellDef>Zadania do wykonania</th>
+                <td mat-cell *matCellDef="let element" class="icon">
+                    <a mat-icon-button color="basic" [routerLink]="[element.id, 'to-do-list']">
+                        <mat-icon>view_list</mat-icon>
+                    </a>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="notes">
+                <th mat-header-cell *matHeaderCellDef>Notatki</th>
+                <td mat-cell *matCellDef="let element" class="icon">
+                    <a mat-icon-button color="basic" [routerLink]="[element.id, 'notes']">
+                        <mat-icon>notes</mat-icon>
+                    </a>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="rowNames"></tr>
+            <tr mat-row *matRowDef="let row; columns: rowNames;"></tr>
+        </table>
+    <mat-paginator [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 15]"
+    aria-label="Wybierz stronę">
+    </mat-paginator>
+</div>

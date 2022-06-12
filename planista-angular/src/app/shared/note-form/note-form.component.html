@@ -1,0 +1,23 @@
+<form [formGroup]="form">
+    <mat-form-field appearance="outline">
+        <mat-label class="form-label" for="title">Tytuł notatki</mat-label>
+        <input matInput class="form-control" id="title" type="text" formControlName="title">
+        <mat-error  *ngIf="form.get('title').hasError('required') && (form.get('title').dirty || form.get('title').touched)">
+            Tytuł notatki jest wymagany
+        </mat-error>
+        <mat-error  *ngIf="form.get('title').hasError('maxlength')">
+            Tytuł notatki nie może być dłuższy niż {{ form.get('title').errors.maxlength.requiredLength }} znaków
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label class="form-label" for="contents">Opis</mat-label>
+        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5" class="form-control" id="contents" type="text" formControlName="contents"></textarea>
+        <mat-error  *ngIf="form.get('contents').hasError('required') && (form.get('contents').dirty || form.get('contents').touched)">
+            Treść notatki jest wymagana
+        </mat-error>
+        <mat-error  *ngIf="form.get('contents').hasError('maxlength')">
+            Treść notatki nie może być dłuższa niż {{ form.get('contents').errors.maxlength.requiredLength }} znaków
+        </mat-error>
+    </mat-form-field>
+</form>

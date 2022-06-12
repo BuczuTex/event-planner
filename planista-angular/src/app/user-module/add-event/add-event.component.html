@@ -1,0 +1,45 @@
+<div class="add-event-container">
+        <mat-stepper [linear]="true">
+            <mat-step [stepControl]="eventForm">
+                <ng-template matStepLabel>Uzupełnij dane wydarzenia</ng-template>
+                <app-event-form [form]="eventForm"></app-event-form>
+                <button class="next-button" matStepperNext mat-raised-button color="primary">Przejdź do kroku 2</button>
+            </mat-step>
+            <mat-step [stepControl]="addressForm">
+                <ng-template matStepLabel>Uzupełnij adres</ng-template>
+                <app-address-form [form]="addressForm"></app-address-form>
+                <button class="next-button" matStepperNext mat-raised-button color="primary">Podsumowanie</button>
+                <button class="prev-button" matStepperPrevious mat-raised-button color="secondary">Przejdź do kroku 1</button>
+            </mat-step>
+            <mat-step>
+                <div id="summary">
+                    <div id="eventInfo">
+                        <h3><strong>Nazwa wydarzenia</strong></h3>
+                        <p>{{ ' ' + eventForm.value!.name }}</p>
+                        <h3><strong>Opis wydarzenia</strong></h3>
+                        <p>{{ eventForm.value!.description }}</p>
+                        <h3><strong>Data wydarzenia</strong></h3> 
+                        <p>
+                            {{ ' ' + eventForm.value.date ? (eventForm.value.date | date: 'short') : ' ' }}
+                        </p>
+                        <h3><strong>Kategoria wydarzenia</strong></h3>
+                        <p>{{ eventForm.value!.category }}</p>
+                    </div>
+                    <div id="addressInfo">
+                        <h3><strong>Adres wydarzenia</strong></h3>
+                        <p>
+                            {{ 
+                                addressForm.value!.street + ' ' + addressForm.value!.buildingNumber + 
+                                (addressForm.value.flatNumber ? '/' + addressForm.value.flatNumber : '')
+                            }}
+                            <br>{{ addressForm.value!.city + ' ' + addressForm.value!.zipCode }}
+                        </p>
+                    </div>
+                <ng-template matStepLabel>Podsumowanie</ng-template>
+                <button id="submitButton" mat-raised-button color="primary" (click)="onSubmit(eventForm, addressForm)">
+                    Utwórz wydarzenie
+                </button>
+                </div>
+            </mat-step>
+        </mat-stepper>
+</div>

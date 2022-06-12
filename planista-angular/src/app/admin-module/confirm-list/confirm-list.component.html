@@ -1,0 +1,116 @@
+<div *ngIf="errandDataSource && toDoListItemsDataSource" id="listContainer">
+    <h1>Lista zadań do weryfikacji</h1>
+    <div id="table1">
+        <table mat-table id="errandListContainer" [dataSource]="errandDataSource" multiTemplateDataRows *ngIf="errandDataSource.data.length > 0">
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>Id</th>
+                <td mat-cell *matCellDef="let element; let i = dataIndex;"> {{ (i + 1) }}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef>Tytuł zadania dla firmy</th>
+                <td mat-cell *matCellDef="let element;"> {{ element.title }}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="accept">
+                <th mat-header-cell *matHeaderCellDef>Potwierdź aktywność użytkownika</th>
+                <td mat-cell *matCellDef="let element; let i = dataIndex;">
+                    <button mat-icon-button color="basic" (click)="$event.stopPropagation(); acceptErrand(i)">
+                        <mat-icon>done</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef>Usuń aktywność użytkownika</th>
+                <td mat-cell *matCellDef="let element; let i = dataIndex;">
+                    <button mat-icon-button color="basic" (click)="$event.stopPropagation(); deleteErrand(i)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="expandedDetail">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsErrand.length">
+                    <div class="errand-details" [@detailExpand]="element == expandedElement ? 'expanded':'collapsed'">
+                        <div class="errand-details-information">
+                            <h2>Zadanie do wykonania</h2>
+                            <h3>Nazwa: {{ element.title }}</h3>
+                            <h3>Opis: {{ element.description }}</h3>
+                            <h3>Zlecone firmie: {{ element.company.name }} </h3>
+                        </div>
+                    </div>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnsErrand"></tr>
+            <tr mat-row *matRowDef="let element; columns: columnsErrand;"
+            class="errand-row"
+            [class.errand-expanded-row]="expandedElement === element"
+            (click)="expandedElement = expandedElement === element ? null : element"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="errand-detail-row"></tr>
+        </table>
+        <mat-paginator #paginator1 [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 15]"
+        aria-label="Wybierz stronę">
+        </mat-paginator>
+    </div>
+
+    <div id="table2">
+        <table mat-table id="toDoListContainer" [dataSource]="toDoListItemsDataSource" multiTemplateDataRows *ngIf="toDoListItemsDataSource.data.length > 0">
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>Id</th>
+                <td mat-cell *matCellDef="let element; let i = dataIndex;"> {{ (i + 1) }}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef>Tytuł zadania</th>
+                <td mat-cell *matCellDef="let element;"> {{ element.title }}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="accept">
+                <th mat-header-cell *matHeaderCellDef>Potwierdź aktywność użytkownika</th>
+                <td mat-cell *matCellDef="let element; let i = dataIndex;">
+                    <button mat-icon-button color="basic" (click)="$event.stopPropagation(); acceptToDoItem(i)">
+                        <mat-icon>done</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef>Usuń aktywność użytkownika</th>
+                <td mat-cell *matCellDef="let element; let i = dataIndex;">
+                    <button mat-icon-button color="basic" (click)="$event.stopPropagation(); deleteToDoItem(i)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="expandedDetail">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsErrand.length">
+                    <div class="to-do-item-details" [@detailExpand]="element == expandedElement ? 'expanded':'collapsed'">
+                        <div class="to-do-item-details-information">
+                            <h2>Zadanie do wykonania</h2>
+                            <p>Nazwa: {{ element.title }}</p>
+                            <p>Opis: {{ element.description }}</p>
+                        </div>
+                    </div>
+                </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="columnsErrand"></tr>
+            <tr mat-row *matRowDef="let element; columns: columnsErrand;"
+            class="to-do-item-row"
+            [class.to-do-item-expanded-row]="expandedElement === element"
+            (click)="expandedElement = expandedElement === element ? null : element"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="to-do-item-detail-row"></tr>
+        </table>
+        <mat-paginator #paginator2 [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 15]"
+        aria-label="Wybierz stronę">
+        </mat-paginator>
+    </div>
+</div>
+<p *ngIf="!(errandDataSource && toDoListItemsDataSource)">Trwa wczytywanie...</p>

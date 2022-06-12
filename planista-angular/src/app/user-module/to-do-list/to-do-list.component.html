@@ -1,0 +1,45 @@
+<div id="toDoListContainer">
+    <h2>Zadania do wykonania</h2>
+    <mat-list *ngIf="toDoListItems" id="toDoList">
+        <mat-list-item class="item-list" *ngFor="let item of toDoListItems; index as i;">
+            <div *ngIf="item.state !== 4 && item.state !== 3" class="item">
+                <div class="item-info">
+                    <p class="item-title">{{ item.title }}</p>
+                    <p class="item-description">{{ item.description }}</p>
+                </div>
+                <div class="item-actions">
+                    <button mat-icon-button (click)="markItemAsDone(i)" title="Oznacz zadanie jako wykonane">
+                        <mat-icon>done</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="deleteToDoItem(i)" title="Usuń zadanie">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="item.state === 4" class="deleted-item">
+                <div class="item-info">
+                    <p class="item-title">{{ item.title }} (Zadanie usunięte)</p>
+                    <p class="item-description">{{ item.description }}</p>
+                </div>
+            </div>
+            <div *ngIf="item.state === 3" class="finished-item">
+                <div class="item-info">
+                    <p class="item-title">{{ item.title }} (Zadanie ukończone)</p>
+                    <p class="item-description">{{ item.description }}</p>
+                </div>
+            </div>
+        </mat-list-item>
+    </mat-list>
+
+    <h3 *ngIf="toDoListItems.length === 0">Brak zadań do wykonania</h3>
+    
+    <div *ngIf="event" id="recomendedItemsContainer">
+        <app-recommendation-system (addItemInfo)="fillForm($event)" [event]="event"></app-recommendation-system>
+    </div>
+    
+    <form [formGroup]="toDoListItemForm">
+        <h3>Nie ma na liście zadania, którego szukasz? Dodaj je!</h3>
+        <app-to-do-list-item-form [form]="toDoListItemForm"></app-to-do-list-item-form>
+        <button mat-raised-button color="primary" (click)="addToDoItem()">Utwórz zadanie</button>
+    </form>
+</div>
